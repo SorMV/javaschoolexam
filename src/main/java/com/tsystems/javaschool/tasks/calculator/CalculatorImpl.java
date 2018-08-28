@@ -125,9 +125,9 @@ public class CalculatorImpl extends Calculator {
         }
     }
 
-    public static void main(String[] args) {
-        String input = new String("(10+10.5345+40.48974536)/10");
-        CalculatorImpl cl = new CalculatorImpl();
-        System.out.println(cl.evaluate(input));
-    }
+//    public static void main(String[] args) {
+//        String input = new String("(10+10.5345+40.48974536)/10");
+//        CalculatorImpl cl = new CalculatorImpl();
+//        System.out.println(cl.evaluate(input));
+//    }
 }
