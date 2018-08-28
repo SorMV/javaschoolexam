@@ -1,5 +1,10 @@
 package com.tsystems.javaschool.tasks.calculator;
 
+/**
+ *
+ *
+ */
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
@@ -7,10 +12,11 @@ import java.util.Collections;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
+
 public class CalculatorImpl extends Calculator {
     private final String FUNCTIONS = "+-*/";
-    private Stack<String> stack = new Stack<String>();
-    private Stack<String> polishStack = new Stack<String>();
+    private Stack<String> stack = new Stack<>();
+    private Stack<String> polishStack = new Stack<>();
 
     private boolean isNumber(String token) {
         try {
