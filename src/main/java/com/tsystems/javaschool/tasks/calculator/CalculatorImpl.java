@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.Collections;
+import java.util.Scanner;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
@@ -49,7 +50,8 @@ public class CalculatorImpl extends Calculator {
     private void toPolish(String input) throws ParseException, IllegalArgumentException {
         stack.clear();
         polishStack.clear();
-        boolean flag = false;
+        int flag = 0;
+        int functionFlag=0;
 
         input = input.replace("(-", "(0-");
         if (input.charAt(0) == '-') {
@@ -59,20 +61,27 @@ public class CalculatorImpl extends Calculator {
                 FUNCTIONS + "()", true);
         while (stringTokenizer.hasMoreTokens()) {
             String token = stringTokenizer.nextToken();
+            if(functionFlag>=2) {
+                throw new IllegalArgumentException();
+            }
             if (isOpenBracket(token)) {
-                flag=true;
+                flag=flag+1;
                 stack.push(token);
             } else if (isCloseBracket(token)) {
-                if(!flag) throw new IllegalArgumentException();
+                flag=flag-1;
+                if(flag!=0) throw new IllegalArgumentException();
                 while (!stack.empty()
                         && !isOpenBracket(stack.lastElement())) {
                     polishStack.push(stack.pop());
-                    flag=false;
                 }
                 stack.pop();
             } else if (isNumber(token)) {
+                if(functionFlag!=0) {
+                    functionFlag--;
+                }
                 polishStack.push(token);
             } else if (isFunction(token)) {
+                functionFlag++;
                 while (!stack.empty()
                         && isFunction(stack.lastElement())
                         && getPriority(token) <= getPriority(stack.lastElement())) {
@@ -89,12 +98,39 @@ public class CalculatorImpl extends Calculator {
     }
 
     private String calculate() throws NumberFormatException {
-
         double result=0;
+        stack.clear();
+        double c=0;
+        String func="0";
         while (polishStack.size()!=1) {
-            double a = new Double(polishStack.pop());
-            double b = new Double(polishStack.pop());
-            switch (polishStack.pop()) {
+            boolean flag=true;
+            double a;
+            double b;
+
+            a = new Double(polishStack.pop());
+            if(!isNumber(polishStack.lastElement())){
+                func=polishStack.pop();
+                b=a;
+                a=c;
+                flag=false;
+            }
+            else {
+                b = new Double(polishStack.pop());
+            }
+
+               if(polishStack.size()>=1&&isFunction(polishStack.lastElement())&&flag) {
+                    func = polishStack.pop();
+                }
+                else {
+                   if (flag) {
+                       c = a;
+                       a = b;
+                       b = new Double(polishStack.pop());
+                       func = polishStack.pop();
+                   }
+               }
+
+            switch (func) {
                 case "+":
                     result = a+b;
                     break;
@@ -114,20 +150,35 @@ public class CalculatorImpl extends Calculator {
     }
 
     public String evaluate(String input) {
-        try {
-            toPolish(input);
-            String answer = calculate();
-            BigDecimal bd = new BigDecimal(answer);
-            bd = bd.setScale(4, RoundingMode.HALF_UP);
-            return Double.toString(bd.doubleValue());
-        } catch (ParseException | IllegalArgumentException e) {
-            return null;
+        if(input!=null&&input!="") {
+            try {
+                toPolish(input);
+                String answer = calculate();
+                int indx = answer.indexOf(".") + 1;
+                if ((answer.charAt(indx) == '0') && (answer.length() == indx + 1)) {
+                    answer = answer.substring(0, indx - 1);
+                    return answer;
+                }
+                BigDecimal bd = new BigDecimal(answer);
+                bd = bd.setScale(4, RoundingMode.HALF_UP);
+                return Double.toString(bd.doubleValue());
+            } catch (ParseException | IllegalArgumentException e) {
+                return null;
+            }
         }
+        return null;
     }
 
     public static void main(String[] args) {
-        String input = new String("(10+10.5345+40.48974536)/10");
+        String input = new String("(12*(5-1)");
         CalculatorImpl cl = new CalculatorImpl();
+        System.out.println(cl.evaluate("2+3")); // Result: 151
+        System.out.println(cl.evaluate("(1+38)*4-5"));
+        System.out.println(cl.evaluate("10/2-7+3*4"));
         System.out.println(cl.evaluate(input));
+        System.out.println(cl.evaluate("10/(2-7++3)*4"));
+
+
+
     }
 }

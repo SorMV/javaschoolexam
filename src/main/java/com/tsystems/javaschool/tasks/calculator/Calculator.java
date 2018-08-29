@@ -11,15 +11,16 @@ public class Calculator {
      * @return string value containing result of evaluation or null if statement is invalid
      */
     public String evaluate(String statement) {
-        // TODO: Implement the logic here
-        return "";
+        Calculator c = new CalculatorImpl();
+
+        return c.evaluate(statement);
     }
 
     public static void main(String[] args) {
-    Calculator c = new CalculatorImpl();
-System.out.println(c.evaluate("(1+38)*4-5")); // Result: 151
-System.out.println(c.evaluate("7*6/2+8")); // Result: 29
-System.out.println(c.evaluate("-12)1//(")); // Result: null
+    Calculator c = new Calculator();
+System.out.println(c.evaluate("2+3")); // Result: 151
+System.out.println(c.evaluate("4-6")); // Result: 29
+System.out.println(c.evaluate("2*3")); // Result: null
     }
 
 }
