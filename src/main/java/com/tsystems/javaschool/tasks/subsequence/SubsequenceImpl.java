@@ -11,7 +11,7 @@ public class SubsequenceImpl extends Subsequence {
                     System.out.println("Second seq. must be longer than first.");
                     return false;
                 }
-        }
+        } else throw new IllegalArgumentException("One or both sequences have no elements");
             int i = 0;
             for (int j = 0; j < seq.size(); j++) {
                 if (subSeq.get(i).equals(seq.get(j))) {
