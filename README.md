@@ -12,7 +12,7 @@ The exam includes 3 tasks to be done: [Calculator](/tasks/Calculator.md), [Pyram
 ### Result ###
 
 * Author name : {Mikhail Sorokin}
-* Travis C.I. : {https://travis-ci.org/SorMV/javaschoolexam}
+* Travis C.I. : { https://travis-ci.org/SorMV/javaschoolexam }
 
 
 ### How to start?  ###
