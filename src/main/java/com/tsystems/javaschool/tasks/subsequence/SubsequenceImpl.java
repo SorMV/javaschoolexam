@@ -7,15 +7,14 @@ import java.util.List;
 public class SubsequenceImpl extends Subsequence {
     public boolean find(List subSeq, List seq) {
         if (seq != null && subSeq != null) {
-            if(subSeq.size()==0) {
+            if (subSeq.size() == 0) {
                 return true;
             }
-                if (subSeq.size() > seq.size()) {
-                  //  System.out.println("Second seq. must be longer than first.");
-                    return false;
-                }
-        
-        
+              else {
+            if (subSeq.size() > seq.size()) {
+                return false;
+            }
+
             int i = 0;
             for (int j = 0; j < seq.size(); j++) {
                 if (subSeq.get(i).equals(seq.get(j))) {
@@ -24,6 +23,7 @@ public class SubsequenceImpl extends Subsequence {
                     } else return true;
                 }
             }
+        }
         } else {
             throw new IllegalArgumentException("One or both sequences have no elements");
         }
@@ -36,5 +36,5 @@ public class SubsequenceImpl extends Subsequence {
         List y = new ArrayList();
         boolean b = s.find(x,y);
         System.out.println(b); // Result: true
-    }
+       }
 }
