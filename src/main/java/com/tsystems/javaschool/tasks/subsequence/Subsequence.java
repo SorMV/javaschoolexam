@@ -1,7 +1,11 @@
 package com.tsystems.javaschool.tasks.subsequence;
 
+import javax.sound.midi.Sequence;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class Subsequence {
 
@@ -15,14 +19,16 @@ public class Subsequence {
      */
     @SuppressWarnings("rawtypes")
     public boolean find(List x, List y) {
+        
         if(x!=null&&y!=null) {
             if (x.isEmpty()) {
                 return true;
+            } else {
+                Subsequence s = new SubsequenceImpl();
+                return s.find(x,y);
             }
-            return false;
+        } else {
+            throw new IllegalArgumentException("One or both sequences have no elements");
         }
-        Subsequence s = new SubsequenceImpl();
-        return s.find(x,y);
     }
-
 }
