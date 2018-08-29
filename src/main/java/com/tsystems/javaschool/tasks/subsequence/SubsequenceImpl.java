@@ -11,7 +11,7 @@ public class SubsequenceImpl extends Subsequence {
                 return true;
             }
                 if (subSeq.size() > seq.size()) {
-                    System.out.println("Second seq. must be longer than first.");
+                  //  System.out.println("Second seq. must be longer than first.");
                     return false;
                 }
         
