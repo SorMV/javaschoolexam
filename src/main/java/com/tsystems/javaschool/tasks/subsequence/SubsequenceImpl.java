@@ -6,10 +6,12 @@ import java.util.List;
 public class SubsequenceImpl extends Subsequence {
     public boolean find(List subSeq, List seq) {
         if (seq != null && subSeq != null) {
-            if (subSeq.size() > seq.size()) {
-                System.out.println("Second seq. must be longer than first.");
-                return false;
-            }
+            if (subSeq.size() > 0 && seq.size() > 0) {
+                if (subSeq.size() > seq.size()) {
+                    System.out.println("Second seq. must be longer than first.");
+                    return false;
+                }
+        }
             int i = 0;
             for (int j = 0; j < seq.size(); j++) {
                 if (subSeq.get(i).equals(seq.get(j))) {
