@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.tasks.subsequence;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Subsequence {
@@ -14,7 +15,7 @@ public class Subsequence {
      */
     @SuppressWarnings("rawtypes")
     public boolean find(List x, List y) {
-        // TODO: Implement the logic here
-        return false;
+        Subsequence s = new SubsequenceImpl();
+        return s.find(x,y);
     }
 }
