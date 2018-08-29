@@ -16,7 +16,7 @@ public class Subsequence {
     @SuppressWarnings("rawtypes")
     public boolean find(List x, List y) {
         if(x!=null&&y!=null) {
-            if (x.size() == 0 & y.size() >= 0) {
+            if (x.size() == 0) {
                 return true;
             }
             return false;
