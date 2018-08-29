@@ -15,6 +15,7 @@ public class PyramidBuilder {
      * @throws {@link CannotBuildPyramidException} if the pyramid cannot be build with given input
      */
     public int[][] buildPyramid(List<Integer> inputNumbers) {
+        if(inputNumbers.contains(null)) throw new CannotBuildPyramidException("Can't build pyramid from this list of numbers");
         int n = isPyramid(inputNumbers.size());
         if (n != 0) {
             int[][] mas = new int[n][2 * n - 1];
